@@ -87,6 +87,12 @@
       <input type="text" id="font-picker" value="Roboto"></input>
     </p>
     <p>
+      Increase font size:
+      <br>
+      <br>
+      <input id="font-input" type="range" min="-72" max="255" value="0"></input>
+    </p>
+    <p>
       Increase width to fix overspill:
       <br>
       <br>
@@ -140,6 +146,7 @@
     var input11 = document.getElementById("txt-behold-picker");
     var input12 = document.getElementById("txt-glory-picker");
     var input13 = document.getElementById("width-input");
+    var input14 = document.getElementById("font-input");
     var repeatColor;
     var selColor;
     var orgWidth = document.getElementById('text').offsetWidth;
@@ -249,6 +256,12 @@
       document.getElementById("text").style.width = (orgWidth + Number(input13.value)) + "px";
     }
 
+    function setFontSize() {
+      document.getElementById("pc").style.fontSize = (72 + Number(input14.value)) + "px";
+      document.getElementById("mr").style.fontSize = (72 + Number(input14.value)) + "px";
+      document.getElementsByClassName("right")[0].style.fontSize = (50 + Number(input14.value)*.45) + "px";
+      document.getElementsByClassName("right")[0].style.lineHeight = (45 + (Number(input14.value)*.70)) + "px"; //number * .9 to get the porpotional size in the same ratio as 50 to 45
+      }
 
     function hideBox() {
       document.getElementById("options-help").style.display = "none";
@@ -309,6 +322,7 @@
     input11.addEventListener("input", setBeholdTxt);
     input12.addEventListener("input", setGloryTxt);
     input13.addEventListener("input", setWiderLayout);
+    input14.addEventListener("input", setFontSize);
 
     /* Future events for leaving full screen
     function exitHandler() {
