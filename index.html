@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta property="og:image" content="http://pltarun.github.io/pcmr/pcmr.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PC Master Race</title>
+  <title>PC Master Race Wallpaper Generator</title>
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <link href="css/sidebar.css" rel="stylesheet" type="text/css">
@@ -34,6 +34,13 @@
             <br><br>
             <input id="file-picker" type="file"></input>
         </p>-->
+
+    <p class="file-picker">
+      <button id="go-button"></button>
+      <label for="go-button">Toggle full screen</label>
+      <br>
+      <br> Press the button above to go full screen. Do this first to avoid messing up text position. Screenshot the page and you can set it as your desktop background. If things look wonky, try to zoom out.
+    </p>
     <p class="file-picker">
       Choose a background image
       <br>
@@ -72,12 +79,12 @@
       <br> color name, hex color, or rgba
     </p>
     <p>
-      Choose box text
+      Choose text
       <br>
       <br>
-      <input type="text" id="txt-pc-picker" value="PC"></input>
-      <input type="text" id="txt-mr-picker" value="MASTER RACE"></input>
-      <input type="text" id="txt-behold-picker" value="behold"></input>
+      <input style="margin-bottom:5px;" type="text" id="txt-pc-picker" value="PC"></input>
+      <input style="margin-bottom:5px;" type="text" id="txt-mr-picker" value="MASTER RACE"></input>
+      <input style="margin-bottom:5px;" type="text" id="txt-behold-picker" value="behold"></input>
       <input type="text" id="txt-glory-picker" value="true glory"></input>
     </p>
     <p>
@@ -87,10 +94,17 @@
       <input type="text" id="font-picker" value="Roboto"></input>
     </p>
     <p>
+<<<<<<< HEAD
       Increase font size:
       <br>
       <br>
       <input id="font-input" type="range" min="-72" max="255" value="0"></input>
+=======
+      Change font size:
+      <br>
+      <br>
+      <input id="fs-input" type="range" min="0.01" step="0.01" max="2.0" value="1.0"></input>
+>>>>>>> upstream/gh-pages
     </p>
     <p>
       Increase width to fix overspill:
@@ -100,16 +114,7 @@
       <br> Adjust this slider if text overflows.
     </p>
     <p>
-      <input type="checkbox" id="shadow-picker"> Shadow</input>
-    </p>
-    <p>
-      <input type="checkbox" id="blur-picker"> Blur</input>
-    </p>
-    <p class="file-picker">
-      <button id="go-button"></button>
-      <label for="go-button">Switch Fullscreen</label>
-      <br>
-      <br> With the button above, the page will go full screen. Screenshot the page and you can set it as your desktop background. Exit fullscreen with the esc key. If things look wonky, try your browser's zoom out function.
+      <input type="checkbox" id="shadow-picker"> Shadow</input>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="blur-picker"> Blur</input>
     </p>
   </nav>
 
@@ -146,10 +151,14 @@
     var input11 = document.getElementById("txt-behold-picker");
     var input12 = document.getElementById("txt-glory-picker");
     var input13 = document.getElementById("width-input");
+<<<<<<< HEAD
     var input14 = document.getElementById("font-input");
+=======
+    var input14 = document.getElementById("fs-input");
+    var orgWidth = document.getElementById('text').offsetWidth;
+>>>>>>> upstream/gh-pages
     var repeatColor;
     var selColor;
-    var orgWidth = document.getElementById('text').offsetWidth;
 
     function displayColorWheel(nameOption) {
 
@@ -257,11 +266,17 @@
     }
 
     function setFontSize() {
+<<<<<<< HEAD
       document.getElementById("pc").style.fontSize = (72 + Number(input14.value)) + "px";
       document.getElementById("mr").style.fontSize = (72 + Number(input14.value)) + "px";
       document.getElementsByClassName("right")[0].style.fontSize = (50 + Number(input14.value)*.45) + "px";
       document.getElementsByClassName("right")[0].style.lineHeight = (45 + (Number(input14.value)*.70)) + "px"; //number * .9 to get the porpotional size in the same ratio as 50 to 45
       }
+=======
+      document.getElementById("text").style.transform = "scale(" + Number(input14.value) + ")";
+    }
+
+>>>>>>> upstream/gh-pages
 
     function hideBox() {
       document.getElementById("options-help").style.display = "none";
@@ -323,6 +338,21 @@
     input12.addEventListener("input", setGloryTxt);
     input13.addEventListener("input", setWiderLayout);
     input14.addEventListener("input", setFontSize);
+<<<<<<< HEAD
+=======
+
+    function doCentre() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      var d = document.getElementById('text');
+      var divW = 900;
+      var divH = d.offsetHeight
+      d.style.top = (h / 2) - (divH / 2) + "px";
+      d.style.left = (w / 2) - (divW / 2) + "px";
+    };
+
+    window.addEventListener("resize", doCentre);
+>>>>>>> upstream/gh-pages
 
     /* Future events for leaving full screen
     function exitHandler() {
@@ -345,6 +375,7 @@
       y_elem = 0; // Stores top, left values (edge) of the element
     // Will be called when user starts dragging an element
     function _drag_init(elem) {
+      window.removeEventListener("resize", doCentre);
       // Store the object of the element which needs to be moved
       selected = elem;
       x_elem = x_pos - selected.offsetLeft;
@@ -478,6 +509,7 @@
       requestAnimationFrame(animate);
     }
     animate();
+    setTimeout(doCentre, 100);
   </script>
 </body>
 
